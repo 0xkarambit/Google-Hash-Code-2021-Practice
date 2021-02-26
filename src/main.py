@@ -1,4 +1,5 @@
 import sys
+import time
 
 # Tests:
 # python src/main.py test/a_example out/outa.txt
@@ -184,9 +185,14 @@ if __name__ == "__main__":
     ]
     for i, v in enumerate(files, 1):
       input_f, output_f = v
+      start = time.time()
       sol = Solution()
       sol.run(input_f, output_f)
-      print(f"{i} build done")
+      end = time.time()
+      print(f"build {i} done. time taken : {end - start}", flush=True)
+    # make a bell sound when all builds have been finished
+    green = '\x1b[32m'
+    print(f'{green}ALL BUILDS DONE\a')
   else:
     sol = Solution()
     sol.run()
