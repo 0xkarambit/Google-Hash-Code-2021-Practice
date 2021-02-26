@@ -17,7 +17,7 @@
 
 # Score
 - A – Example: 49 points
-- B – A little bit of everything: 5,420 points
-- C – Many ingredients: 90,964,440 points
-- D – Many pizzas: 791,376 points
-- E – Many teams: 6,628,821 points
+- B – A little bit of everything: 6,972 points
+- C – Many ingredients: 349,095,013 points
+- D – Many pizzas: 6,032,931 points
+- E – Many teams: 10,902,031 points
