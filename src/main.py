@@ -59,6 +59,9 @@ class Team:
     is_unique = len(a) == num_unique
     return (is_unique, num_unique)
 
+  def get_score(self):
+    return len(set(self.ingredients)) ** 2
+
   def output(self):
     return f"{self.size} " + " ".join([str(p.index) for p in self.pizzas])
     
@@ -160,7 +163,13 @@ class Solution:
       # team has been served
       self.served_teams.append(team)
       self.unserved_teams.remove(team)
-      
+  
+  def get_score(self):
+    score = 0
+    for team in self.served_teams:
+      score += team.get_score()
+    return score
+
   def output(self, out_file):
     f = open(out_file, "w")
     f.write(str(len(self.served_teams)) + "\n")
@@ -172,6 +181,7 @@ class Solution:
     self.read(in_file or sys.argv[1])
     self.greedy_solve()
     self.output(out_file or sys.argv[2])
+    return self.get_score()
 
 if __name__ == "__main__":
   if sys.argv[1] == "build":
@@ -183,16 +193,20 @@ if __name__ == "__main__":
       ["test/d_many_pizzas.in", "out/outd.txt"],
       ["test/e_many_teams.in", "out/oute.txt"]
     ]
+    scores = []
     for i, v in enumerate(files, 1):
       input_f, output_f = v
       start = time.time()
       sol = Solution()
-      sol.run(input_f, output_f)
+      scores.append(sol.run(input_f, output_f))
       end = time.time()
-      print(f"build {i} done. time taken : {end - start}", flush=True)
+      red = "\x1b[31m"
+      clear = "\x1b[0m"
+      print(f"build {i} done. time taken : {end - start} score : {red + str(scores[-1]) + clear}", flush=True)
     # make a bell sound when all builds have been finished
+    total_score = sum(scores)
     green = '\x1b[32m'
-    print(f'{green}ALL BUILDS DONE\a')
+    print(f'{green}ALL BUILDS DONE. TOTAL SCORE {total_score}\a')
   else:
     sol = Solution()
     sol.run()
