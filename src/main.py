@@ -51,13 +51,12 @@ class Team:
 
   def overlapping_ingredients(self, pizza):
     # check if pizza to be added's ingredients are overlapping and how much
-    num_unique = 0
-    is_unique = True
-    for ingredient in pizza.ingredients:
-      if (ingredient not in self.ingredients):
-        num_unique += 1
-      else:
-        is_unique = False
+    a = pizza.ingredientsSet
+    b = set(self.ingredients)
+    # if all ingredients are unique then len(pizza.ingredients) == len(a - b) ie no of unique ingredients
+    # is_unique = len(a) == num_unique
+    num_unique = len(a - b)
+    is_unique = len(a) == num_unique
     return (is_unique, num_unique)
 
   def output(self):
@@ -69,6 +68,7 @@ class Pizza:
     self.index = index
     self.num_ingredients = num_ingredients
     self.ingredients = ingredients
+    self.ingredientsSet = set(ingredients)
 
 class Solution:
   def __init__(self):
