@@ -198,15 +198,15 @@ if __name__ == "__main__":
       input_f, output_f = v
       start = time.time()
       sol = Solution()
-      scores.append(sol.run(input_f, output_f))
+      score = sol.run(input_f, output_f)
+      scores.append(score)
       end = time.time()
-      red = "\x1b[31m"
+      red = "\x1b[91m"
       clear = "\x1b[0m"
-      print(f"build {i} done. time taken : {end - start} score : {red + str(scores[-1]) + clear}", flush=True)
+      print(f"build {i} done. time taken : {end - start} score : {red + str(score) + clear}", flush=True)
     # make a bell sound when all builds have been finished
-    total_score = sum(scores)
     green = '\x1b[32m'
-    print(f'{green}ALL BUILDS DONE. TOTAL SCORE {total_score}\a')
+    print(f'{green}ALL BUILDS DONE. TOTAL SCORE {sum(scores)}\a')
   else:
     sol = Solution()
     sol.run()
