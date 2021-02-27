@@ -181,7 +181,6 @@ class Solution:
     self.read(in_file or sys.argv[1])
     self.greedy_solve()
     self.output(out_file or sys.argv[2])
-    return self.get_score()
 
 if __name__ == "__main__":
   if sys.argv[1] == "build":
@@ -196,11 +195,14 @@ if __name__ == "__main__":
     scores = []
     for i, v in enumerate(files, 1):
       input_f, output_f = v
+      # running solution and measuring peformance
       start = time.time()
       sol = Solution()
-      score = sol.run(input_f, output_f)
-      scores.append(score)
+      sol.run(input_f, output_f)
       end = time.time()
+      # getting score
+      score = sol.get_score()
+      scores.append(score)
       red = "\x1b[91m"
       clear = "\x1b[0m"
       print(f"build {i} done. time taken : {end - start} score : {red + str(score) + clear}", flush=True)
